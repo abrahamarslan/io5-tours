@@ -1,9 +1,16 @@
 <ion-header>
   <ion-toolbar>
+  	<ion-buttons slot="start">
+  		<ion-menu-button></ion-menu-button>
+  	</ion-buttons>
     <ion-title>Tour-Types</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content class="ion-padding">
+	<ion-list>
+		<ion-item *ngFor="let tourtype of tourTypes">
+			{{tourtype.Name}}
+		</ion-item>
+	</ion-list>
 </ion-content>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {StoursService} from '../../services/stours.service';
 
 @Component({
   selector: 'app-regions',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./regions.page.scss'],
 })
 export class RegionsPage implements OnInit {
+    regions: any = null;
+    constructor(private _stours: StoursService) { }
 
-  constructor() { }
-
-  ngOnInit() {
-  }
+      ngOnInit() {
+            this.regions = this._stours.regions;
+      }
 
 }

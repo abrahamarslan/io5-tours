@@ -11,7 +11,7 @@ import {Observable} from 'rxjs';
 export class DetailsPage implements OnInit {
 
   tour: any = null;
-  constructor(private _route:ActivatedRoute, private router: Router) { }
+  constructor(private _route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
   	console.log(this._route);
