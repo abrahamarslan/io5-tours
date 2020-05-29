@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable} from 'rxjs';
-
+import {StoursService} from '../../services/stours.service';
+import _ from 'lodash';
 
 @Component({
   selector: 'app-details',
@@ -11,12 +12,12 @@ import {Observable} from 'rxjs';
 export class DetailsPage implements OnInit {
 
   tour: any = null;
-  constructor(private _route: ActivatedRoute, private router: Router) { }
+  constructor(private _route: ActivatedRoute, private router: Router, private _stours: StoursService) { }
 
   ngOnInit() {
-  	console.log(this._route);
-  	this.tour = this._route.snapshot.params;
-  	console.log(this.tour);
+  	let id = this._route.snapshot.paramMap.get('id');
+  	this.tour = _.find(this._stours.tours, ['ID',parseInt(id)]);
+
   }
 
 }
