@@ -13,6 +13,7 @@ import {FavoritesService} from './services/favorites.service';
 })
 export class AppComponent implements OnInit {
   public selectedIndex = 0;
+  public settings: any = {};
   public appPages = [
     {
       title: 'Favorites',
@@ -49,6 +50,11 @@ export class AppComponent implements OnInit {
       this._stours.initialize();
       this._favorites.initialize(this._stours.tours);
     });
+  }
+
+  //User has changed their settings
+  updateSettings() {
+    console.log(this.settings.notifications);
   }
 
   ngOnInit() {

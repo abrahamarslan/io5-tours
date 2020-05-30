@@ -8,20 +8,51 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-    <ion-button routerLink="/request" routerDirection="forward">
-        Request a Tour
-    </ion-button>
+    <ion-card>
+        <ion-card-header>
+            <ion-card-subtitle>
+                {{tourType}} / {{region}}
+            </ion-card-subtitle>
+            <ion-card-title>
+                {{tour.Title}}
+            </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            {{tour.Description}}
+            <hr />
+            <ion-chip>
+                <ion-icon name="stopwatch"></ion-icon>
+                <ion-label>{{tour.Duration}} min</ion-label>
+            </ion-chip>
+            <ion-chip>
+                <ion-icon name="people"></ion-icon>
+                <ion-label>up to {{tour.MaxPersons}}</ion-label>
+            </ion-chip>
+            <ion-chip>
+                <ion-icon name="language"></ion-icon>
+                <ion-label>{{tour.PriceG}} &euro; (German)</ion-label>
+            </ion-chip>
+            <ion-chip>
+                <ion-icon name="globe"></ion-icon>
+                <ion-label>{{tour.PriceF}} &euro; (Other languages)</ion-label>
+            </ion-chip>
+        </ion-card-content>
+    </ion-card>
 </ion-content>
 
 <ion-footer class="ion-padding">
-    <ion-button (click)="_favorites.add(tour); isFavorite = true;"
-                *ngIf="!isFavorite"
+    <ion-button (click)="presentActionSheet()"
                 expand="block">
-        Add to Favorites
+        Options
     </ion-button>
-    <ion-button (click)="_favorites.remove(tour); isFavorite=false;"
-                *ngIf ="isFavorite"
-                expand="block">
-        Remove from Favorites
-    </ion-button>
+<!--    <ion-button (click)="_favorites.add(tour); isFavorite = true;"-->
+<!--                *ngIf="!isFavorite"-->
+<!--                expand="block">-->
+<!--        Add to Favorites-->
+<!--    </ion-button>-->
+<!--    <ion-button (click)="_favorites.remove(tour); isFavorite=false;"-->
+<!--                *ngIf ="isFavorite"-->
+<!--                expand="block">-->
+<!--        Remove from Favorites-->
+<!--    </ion-button>-->
 </ion-footer>

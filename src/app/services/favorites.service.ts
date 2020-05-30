@@ -15,6 +15,7 @@ export class FavoritesService {
    * @returns {}
    */
   initialize(tours) {
+    console.log(tours);
     this.favTours = [];
     let that = this;
     //this.favIDs = JSON.parse(window.localStorage.getItem('FavoriteIDs'));

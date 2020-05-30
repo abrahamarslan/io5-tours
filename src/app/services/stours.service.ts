@@ -16,12 +16,12 @@ export class StoursService {
    * @return {}
    */
    initialize() {
-   	this.getRegions()
-   		.then(data => this.regions = data);
-	this.getTourTypes()
-		.then(data => this.tourTypes = _.sortBy(data, 'Name'));
-	this.getTours()
-		.then(data => this.tours = _.sortBy(data, 'Title'));
+	  this.getRegions()
+		  .then(data => this.regions = data);
+	  this.getTourTypes()
+		  .then(data => this.tourTypes = _.sortBy(data, 'Name'));
+	  this.getTours()
+		  .then(data => this.tours = _.sortBy(data, 'Title'));
    }
 
   /**
