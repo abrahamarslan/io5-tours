@@ -17,6 +17,7 @@ export class DetailsPage implements OnInit {
   isFavorite: boolean;
   region: string;
   tourType: string;
+  showSocial: boolean = false;
 
   constructor(private _route: ActivatedRoute,
               private router: Router,
@@ -97,4 +98,29 @@ export class DetailsPage implements OnInit {
     });
     await alert.present();
   }
+
+  /**
+   * @description Toggles display of social fab button
+   * @param {}
+   */
+  toggleSocial() {
+    this.showSocial = !this.showSocial;
+  }
+
+  /**
+   * @description Open the social sharing application
+   * @param {name} Name of sharing app
+   */
+  openSocial(app) {
+    console.log('Native sharing via ' + app);
+  }
+
+  /**
+   * @description load default image when image fails to load
+   * @param {$event}
+   */
+  loadDefaultImage(event) {
+    event.target.src = '/assets/images/posts/default.jpg';
+  }
+
 }

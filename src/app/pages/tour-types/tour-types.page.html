@@ -12,6 +12,7 @@
 		<ion-item *ngFor="let tourtype of tourTypes"
 				  [routerLink]="['/list', {Category: 'Tourtype', Criteria: tourtype.ID, Name: tourtype.Name}]"
 				  routerDirection="forward">
+			<ion-icon name="{{tourtype.Icon}}" slot="start"></ion-icon>
 			{{tourtype.Name}}
 			<ion-badge slot="end">
 				{{tourtype.Count}}

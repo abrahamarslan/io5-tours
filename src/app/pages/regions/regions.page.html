@@ -11,6 +11,7 @@
 	<ion-list>
 		<ion-item *ngFor="let region of regions" [routerLink]="['/list', {Category: 'Region', Criteria: region.ID, Name: region.Name}]" routerDirection="forward">
 			{{region.Name}}
+			<ion-icon name="{{region.Icon}}" slot="start"></ion-icon>
 			<ion-badge slot="end">{{region.Count}}</ion-badge>
 		</ion-item>
 	</ion-list>

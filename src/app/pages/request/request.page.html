@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-  	<ion-buttons>
+  	<ion-buttons slot="start">
   		<ion-back-button></ion-back-button>
   	</ion-buttons>
     <ion-title>Request</ion-title>
@@ -8,7 +8,36 @@
 </ion-header>
 
 <ion-content>
-	<ion-button routerLink="/favorites" routerDirection="root">
-		Back to favorites
-	</ion-button>
+	<ion-list>
+		<!--	Date-->
+		<ion-item>
+			<ion-label>Date</ion-label>
+			<ion-datetime [(ngModel)]="request.Date"
+						  min="{{day_after_tomorrow}}"
+						  max="{{two_years_later}}"
+						  display-format="DDD, MMMM DD YYYY"
+						  picker-format="MMMM DD YYYY"
+						  placeholder="Please choose your desired tour date">
+			</ion-datetime>
+		</ion-item>
+		<!--	Time-->
+		<ion-item>
+			<ion-label>Time</ion-label>
+			<ion-datetime [ngModel]="request.Time"
+						  hourValues="9,10,11,12,13,14,15,16,17"
+						  minute-values="0,15,30,45"
+						  display-format="hh:mm A"
+						  picker-format="h mm"
+						  placeholder="Please choose your desired tour time">
+			</ion-datetime>
+		</ion-item>
+	</ion-list>
 </ion-content>
+<ion-footer class="ion-padding">
+	<ion-button expand="block" routerLink="/favorites" routerDirection="root">
+		Back to Favorites
+	</ion-button>
+	<ion-button expand="block" (click)="send()">
+		Send Request
+	</ion-button>
+</ion-footer>
