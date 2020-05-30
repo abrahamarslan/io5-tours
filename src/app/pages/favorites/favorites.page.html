@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-  	<ion-buttons>
+  	<ion-buttons slot="start">
   		<ion-menu-button></ion-menu-button>
   	</ion-buttons>
     <ion-title>Favorites</ion-title>
@@ -9,8 +9,11 @@
 
 <ion-content>
 	<ion-list>
-		<ion-item *ngFor="let tour of tours" [routerLink]="['/details',tour]" routerDirection="forward">
-			{{tour.title}}
+		<ion-item *ngFor="let tour of _favorites.favTours" [routerLink]="['/details/',tour.ID]" routerDirection="forward">
+			{{tour.Title}}
+		</ion-item>
+		<ion-item *ngIf="_favorites.favTours?.length==0">
+			Fussy much? You do not have any favorites yet!
 		</ion-item>
 	</ion-list>
 </ion-content>

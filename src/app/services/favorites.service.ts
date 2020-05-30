@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
+import {Storage} from '@ionic/storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FavoritesService {
-  public favIDs: Array<number>;
+  public favIDs: Array<number> = null;
   public favTours: Array<any>;
-  constructor() { }
+  constructor(private _storage: Storage) { }
 
   /**
    * @description To initialize the favorite service
@@ -15,16 +16,24 @@ export class FavoritesService {
    */
   initialize(tours) {
     this.favTours = [];
-    this.favIDs = JSON.parse(window.localStorage.getItem('FavoriteIDs'));
-    if(this.favIDs == null) {
-      this.favIDs = [];
-    } else {
-      tours.forEach(tour => {
-        if(this.favIDs.indexOf(tour.ID) != -1) {
-          this.favTours.push(tour);
-        }
-      });
-    }
+    let that = this;
+    //this.favIDs = JSON.parse(window.localStorage.getItem('FavoriteIDs'));
+    this._storage.ready()
+        .then(() => {
+          this._storage.get('FavoriteIDs')
+              .then((data) => {
+                that.favIDs = data;
+                if(that.favIDs == null) {
+                  that.favIDs = [];
+                } else {
+                  tours.forEach(tour => {
+                    if(that.favIDs.indexOf(tour.ID) != -1) {
+                      that.favTours.push(tour);
+                    }
+                  });
+                }
+              });
+        });
   }
 
   /**
@@ -35,7 +44,8 @@ export class FavoritesService {
   add(tour) {
     this.favIDs.push(tour.ID);
     this.favTours.push(tour);
-    window.localStorage.setItem('FavoriteIDs', JSON.stringify(this.favIDs));
+    //window.localStorage.setItem('FavoriteIDs', JSON.stringify(this.favIDs));
+    this._storage.set('FavoriteIDs', this.favIDs);
   }
 
   /**
@@ -47,7 +57,8 @@ export class FavoritesService {
     let removeIndex:number = this.favIDs.indexOf(tour.ID);
     if(removeIndex != -1) {
       this.favIDs.splice(removeIndex, 1);
-      window.localStorage.setItem('FavoriteIDs', JSON.stringify(this.favIDs));
+      //window.localStorage.setItem('FavoriteIDs', JSON.stringify(this.favIDs));
+      this._storage.set('FavoriteIDs', this.favIDs);
     }
   }
 }
