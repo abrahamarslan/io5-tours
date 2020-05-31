@@ -11,10 +11,11 @@ import { AppRoutingModule } from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import {IonicStorageModule} from '@ionic/storage';
 import {FormsModule} from '@angular/forms';
+import {AboutComponent} from './components/about/about.component';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, AboutComponent],
+  entryComponents: [AboutComponent],
     imports: [
         BrowserModule,
         IonicModule.forRoot(),

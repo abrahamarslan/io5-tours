@@ -1,36 +1,90 @@
 <ion-header>
   <ion-toolbar>
-  	<ion-buttons slot="start">
-  		<ion-back-button></ion-back-button>
-  	</ion-buttons>
     <ion-title>Request</ion-title>
+	<ion-buttons slot="end">
+		<ion-button (click)="cancel()">Cancel</ion-button>
+	</ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 	<ion-list>
-		<!--	Date-->
-		<ion-item>
-			<ion-label>Date</ion-label>
-			<ion-datetime [(ngModel)]="request.Date"
-						  min="{{day_after_tomorrow}}"
-						  max="{{two_years_later}}"
-						  display-format="DDD, MMMM DD YYYY"
-						  picker-format="MMMM DD YYYY"
-						  placeholder="Please choose your desired tour date">
-			</ion-datetime>
-		</ion-item>
-		<!--	Time-->
-		<ion-item>
-			<ion-label>Time</ion-label>
-			<ion-datetime [ngModel]="request.Time"
-						  hourValues="9,10,11,12,13,14,15,16,17"
-						  minute-values="0,15,30,45"
-						  display-format="hh:mm A"
-						  picker-format="h mm"
-						  placeholder="Please choose your desired tour time">
-			</ion-datetime>
-		</ion-item>
+		<!--	Tour info group-->
+		<ion-item-group>
+			<ion-item-divider>
+				<ion-label>Tour</ion-label>
+			</ion-item-divider>
+			<ion-item>
+				<ion-thumbnail slot="start">
+					<ion-img src="https://source.unsplash.com/random/128x128" (ionError)="loadDefaultImage($event)"></ion-img>
+				</ion-thumbnail>
+				<ion-label>
+					<h2 class="ion-text-wrap">{{tour.Title}}</h2>
+					<p>Duration: {{tour.Duration}} min</p>
+				</ion-label>
+			</ion-item>
+		</ion-item-group>
+		<!--	Schedule Group-->
+		<ion-item-group>
+				<ion-item-divider>
+					<ion-label>Desired Schedule</ion-label>
+				</ion-item-divider>
+			<!--	Date-->
+			<ion-item>
+				<ion-label>Date</ion-label>
+				<ion-datetime [(ngModel)]="request.Date"
+							  min="{{day_after_tomorrow}}"
+							  max="{{two_years_later}}"
+							  display-format="DDD, MMMM DD YYYY"
+							  picker-format="MMMM DD YYYY"
+							  placeholder="Tour date">
+				</ion-datetime>
+			</ion-item>
+			<!--	Time-->
+			<ion-item>
+				<ion-label>Time</ion-label>
+				<ion-datetime [ngModel]="request.Time"
+							  hourValues="9,10,11,12,13,14,15,16,17"
+							  minute-values="0,15,30,45"
+							  display-format="hh:mm A"
+							  picker-format="h mm"
+							  placeholder="Tour time">
+				</ion-datetime>
+			</ion-item>
+		</ion-item-group>
+		<!--	Contact information-->
+		<ion-item-group>
+			<ion-item-divider>
+				<ion-label>Contact Information</ion-label>
+			</ion-item-divider>
+			<!--	First Name-->
+			<ion-item>
+				<ion-label>First Name</ion-label>
+				<ion-input [ngModel]="request.firstName"
+							  type="text"
+							  [minlength]="3"
+							  placeholder="Enter your first name">
+				</ion-input>
+			</ion-item>
+			<!--	Last Name-->
+			<ion-item>
+				<ion-label>Last Name</ion-label>
+				<ion-input [ngModel]="request.lastName"
+						   type="text"
+						   [minlength]="3"
+						   placeholder="Enter your last name">
+				</ion-input>
+			</ion-item>
+			<!--	Email-->
+			<ion-item>
+				<ion-label>Email</ion-label>
+				<ion-input [ngModel]="request.email"
+						   type="email"
+						   [minlength]="3"
+						   placeholder="Your e-mail">
+				</ion-input>
+			</ion-item>
+		</ion-item-group>
 	</ion-list>
 </ion-content>
 <ion-footer class="ion-padding">

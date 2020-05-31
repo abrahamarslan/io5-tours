@@ -4,7 +4,8 @@ import {Observable} from 'rxjs';
 import {StoursService} from '../../services/stours.service';
 import _ from 'lodash';
 import {FavoritesService} from '../../services/favorites.service';
-import {ActionSheetController, AlertController} from '@ionic/angular';
+import {ActionSheetController, AlertController, ModalController} from '@ionic/angular';
+import {RequestPage} from '../request/request.page';
 
 @Component({
   selector: 'app-details',
@@ -24,7 +25,8 @@ export class DetailsPage implements OnInit {
               private _stours: StoursService,
               public _favorites: FavoritesService,
               private _actionSheetCtrl: ActionSheetController,
-              private _alertCtrl: AlertController) { }
+              private _alertCtrl: AlertController,
+              private _modalCtrl: ModalController) { }
 
   ngOnInit() {
   	const id = this._route.snapshot.paramMap.get('id');
@@ -51,8 +53,7 @@ export class DetailsPage implements OnInit {
         {
           text: 'Request',
           handler: () => {
-            //ToDo
-            window.location.href = "/request";
+            this.presentModal();
           }
         },
         {
@@ -121,6 +122,18 @@ export class DetailsPage implements OnInit {
    */
   loadDefaultImage(event) {
     event.target.src = '/assets/images/posts/default.jpg';
+  }
+
+  /**
+   * @description Modal request paga
+   * @param {}
+   */
+  async presentModal() {
+    const modal = await this._modalCtrl.create({
+      component: RequestPage,
+      componentProps: this.tour
+    });
+    modal.present();
   }
 
 }

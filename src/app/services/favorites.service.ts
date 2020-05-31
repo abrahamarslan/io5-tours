@@ -35,6 +35,8 @@ export class FavoritesService {
                 }
               });
         });
+    console.log(this.favIDs);
+    console.log(this.favTours);
   }
 
   /**

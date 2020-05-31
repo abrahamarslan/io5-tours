@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import {Platform, PopoverController} from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import {StoursService} from 'src/app/services/stours.service';
 import {FavoritesService} from './services/favorites.service';
+import {AboutComponent} from './components/about/about.component';
 
 @Component({
   selector: 'app-root',
@@ -38,18 +39,27 @@ export class AppComponent implements OnInit {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private _stours: StoursService,
-    private _favorites: FavoritesService
+    private _favorites: FavoritesService,
+    private _popoverCtrl: PopoverController
   ) {
     this.initializeApp();
   }
 
-  initializeApp() {
-    this.platform.ready().then(() => {
+  async initializeApp() {
+    await this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this._stours.initialize();
-      this._favorites.initialize(this._stours.tours);
+      this.initServices();
     });
+  }
+
+  /**
+   * @description initialize services
+   * @param {}
+   */
+  async initServices() {
+    await this._stours.initialize();
+    await this._favorites.initialize(this._stours.tours);
   }
 
   //User has changed their settings
@@ -62,5 +72,17 @@ export class AppComponent implements OnInit {
     if (path !== undefined) {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
     }
+  }
+
+  /**
+   * @description About the application popover
+   * @param {}
+   */
+  async about() {
+    const popover = await this._popoverCtrl.create({
+      component: AboutComponent,
+      translucent: true
+    });
+    await popover.present();
   }
 }

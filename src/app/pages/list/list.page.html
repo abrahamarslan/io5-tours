@@ -12,7 +12,14 @@
     <ion-item *ngFor="let tour of tours"
               [routerLink]="'/details/' + tour.ID"
               routerDirection="forward">
-      {{tour.Title}}
+      <ion-thumbnail slot="start">
+        <ion-img src="https://source.unsplash.com/random/128x128" (ionError)="loadDefaultImage($event)"></ion-img>
+      </ion-thumbnail>
+      <ion-label>
+        <h2 class="ion-text-wrap">{{tour.Title}}</h2>
+        <p>Duration: {{tour.Duration}} mins</p>
+      </ion-label>
+
     </ion-item>
   </ion-list>
 </ion-content>

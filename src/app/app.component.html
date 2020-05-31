@@ -18,6 +18,10 @@
             <ion-label>Allow messages</ion-label>
             <ion-checkbox [(ngModel)]="settings.notifications" (ionChange)="updateSettings()"></ion-checkbox>
           </ion-item>
+          <ion-item (click)="about()">
+            <ion-icon slot="start" name="information-circle"></ion-icon>
+            <ion-label>About</ion-label>
+          </ion-item>
         </ion-list>
       </ion-footer>
     </ion-menu>
